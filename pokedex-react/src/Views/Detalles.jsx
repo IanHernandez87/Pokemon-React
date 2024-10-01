@@ -216,7 +216,7 @@ const Detalles = () => {
                       </CardText>
                     </Col>
                     <Col md='6'>
-                      <img src={imagen} alt={pokemon.name} className='w-100' />
+                      <img src={imagen}  className='img-fluid' />
                     </Col>
                     <Col md='12 mt-3'>
                       <CardText className='fs-4 text-center'><b>Estadísticas</b></CardText>
