@@ -1,0 +1,23 @@
+npm i react-router-dom @fortawesome/fontawesome-free axios bootstrap reactstrap react-bootstrap-pagination-control animate.css
+instalacion de dependencias
+
+Enlace de Documentaciones
+Componentes y modulos para la integracion de Bootstrap en React
+https://reactstrap.github.io/?path=/story/home-installation--page 
+
+Biblioteca para los iconos y las fuentes 
+https://docs.fontawesome.com/web/use-with/react
+
+biblioteca para gestionar la navegación(Rutas) dentro de la App
+https://reactrouter.com/en/main/start/tutorial
+
+Documentacion para la paginacion en la App
+https://www.npmjs.com/package/react-bootstrap-pagination-control
+
+Documentacion de axios para las peticiones a la Api
+https://axios-http.com/docs/intro
+
+animaciones en css
+https://www.npmjs.com/package/animate.css-react
+https://stackoverflow.com/questions/62682905/use-animate-css-in-reactjs-with-react-animated-css
+
