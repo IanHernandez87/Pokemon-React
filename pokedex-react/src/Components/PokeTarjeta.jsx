@@ -35,7 +35,7 @@ const PokeTarjeta = ({ pok }) => {
           <CardImg src='/img/loading.gif' height='200' className='p-3' />
         </Card>
       ) : ( 
-        <Card className='shadow border-4 border-warning'>
+        <Card className='card-hover shadow border-4 border-warning'>
           <CardImg src={imagen} height='150' className='p-2' />
           <CardBody className='text-center'>
             <Badge pill color='danger'>#{pokemon.id}</Badge>
