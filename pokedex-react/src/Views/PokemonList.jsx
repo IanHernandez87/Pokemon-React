@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import pokemonService from './pokemonService'; 
 import { Container, Row, Col, InputGroup, InputGroupText, Input } from "reactstrap";
 import PokeTarjeta from '../Components/PokeTarjeta'
+import { PaginationControl } from 'react-bootstrap-pagination-control';
 
 const PokemonList = () => {
   const [pokemones, setPokemones] = useState([]);
@@ -10,26 +11,33 @@ const PokemonList = () => {
   const [filtro, setFiltro] = useState('');
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     fetchPokemones(); 
     fetchAllPokemones();
+    goPage();
+    buscar();
   }, [offset, limit]);
 
   const fetchPokemones = async () => {
     try {
       const results = await pokemonService.getPokemones(limit, offset);
-      setPokemones(results); 
-      setListado(results); 
+      setPokemones(results.results); 
+      setListado(results.results); 
+      setTotal(results.count); 
+      console.log("Total Pokémon: ", results.count); 
     } catch (error) {
       console.error("Error al obtener los Pokémon:", error);
     }
   };
+  
 
   const fetchAllPokemones = async () => {
     try {
-      const results = await pokemonService.getAllPokemones();
-      setAllPokemones(results); 
+      const resultado = await pokemonService.getAllPokemones();
+      setTotal(resultado.count);
+      setAllPokemones(resultado); 
     } catch (error) {
       console.error("Error al obtener los Pokémon:", error);
     }
@@ -51,6 +59,12 @@ const PokemonList = () => {
       }
   }
 
+  const goPage = async(p) => {
+    setListado([]);
+    await pokemonService.getPokemones((p==1) ? 0 : ((p-1)*20) ); 
+    setOffset(p);
+  }
+
   return (
     <Container className="shadow bg-danger mt-3">
       <Row>
@@ -66,6 +80,8 @@ const PokemonList = () => {
           { listado.map((pok,i)=> (
             <PokeTarjeta pok={pok} key={i}/>
           ))}
+          <PaginationControl last={true} limit={limit} total={total}
+          page={offset} changePage={page=> goPage(page)}/>
       </Row>
     </Container>
   );

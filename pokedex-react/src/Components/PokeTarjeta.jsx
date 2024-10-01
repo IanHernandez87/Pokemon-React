@@ -4,7 +4,7 @@ import pokemonService from '../Views/pokemonService';
 import { Link } from 'react-router-dom';
 
 const PokeTarjeta = ({ pok }) => { 
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState([]);
   const [imagen, setImagen] = useState('');
   const [loading, setLoading] = useState(true); 
 
@@ -42,7 +42,7 @@ const PokeTarjeta = ({ pok }) => {
             <label className='fs-4 text-capitalize'>{pokemon.name}</label>
           </CardBody>
           <CardFooter className='bg-warning d-flex justify-content-center'>
-            <Link className='btn btn-dark'>
+            <Link to={'/pokemon/'+pokemon.name} className='btn btn-dark'>
               <i className='fa-solid fa-arrow-up-right-from-square'></i> Detalle
             </Link>
           </CardFooter>
