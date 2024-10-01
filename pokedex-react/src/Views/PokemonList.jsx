@@ -3,6 +3,7 @@ import pokemonService from './pokemonService';
 import { Container, Row, Col, InputGroup, InputGroupText, Input } from "reactstrap";
 import PokeTarjeta from '../Components/PokeTarjeta'
 import { PaginationControl } from 'react-bootstrap-pagination-control';
+import axios from 'axios';
 
 const PokemonList = () => {
   const [pokemones, setPokemones] = useState([]);
@@ -18,7 +19,18 @@ const PokemonList = () => {
     fetchAllPokemones();
     goPage();
     buscar();
+    getPokemones(offset);
   }, [offset, limit]);
+
+  const getPokemones = async(o) =>{
+    const liga = 'https://pokeapi.co/api/v2/pokemon?limit='+ limit + '&offset=' + o;
+    axios.get(liga).then(async(response) => {
+      const respuesta = response.data;
+      setPokemones(respuesta.results);
+      setListado(respuesta.results);
+      setTotal(respuesta.count);
+    })
+  }
 
   const fetchPokemones = async () => {
     try {
@@ -61,7 +73,7 @@ const PokemonList = () => {
 
   const goPage = async(p) => {
     setListado([]);
-    await pokemonService.getPokemones((p==1) ? 0 : ((p-1)*20) ); 
+    await getPokemones((p==1) ? 0 : ((p-1)*20) ); 
     setOffset(p);
   }
 
