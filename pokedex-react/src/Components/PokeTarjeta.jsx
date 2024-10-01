@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const PokeTarjeta = ({ pok }) => { 
   const [pokemon, setPokemon] = useState({});
   const [imagen, setImagen] = useState('');
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     getPokemon();
@@ -16,10 +16,10 @@ const PokeTarjeta = ({ pok }) => {
     try {
       const data = await pokemonService.getPokemonDetail(pok.url); 
       setPokemon(data);
-      if(data.sprites.other.dream_world.front_default != null){
+      if (data.sprites.other.dream_world.front_default) {
         setImagen(data.sprites.other.dream_world.front_default); 
-      } else{
-        setImagen(data.sprites.other['official-network'].front_default); 
+      } else {
+        setImagen(data.sprites.other['official-artwork'].front_default); 
       }
     } catch (error) {
       console.error("Error al obtener los detalles del Pokémon:", error);

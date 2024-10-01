@@ -2,10 +2,19 @@ import axios from 'axios';
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
-// Función para obtener la lista de Pokémon
 const getPokemones = async (limit, offset) => {
   try {
     const response = await axios.get(`${BASE_URL}?limit=${limit}&offset=${offset}`);
+    return response.data.results; 
+  } catch (error) {
+    console.error("Error al obtener los Pokémon:", error);
+    throw error; 
+  }
+};
+
+const getAllPokemones = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}?limit=100000&offset=0`);
     return response.data.results; 
   } catch (error) {
     console.error("Error al obtener los Pokémon:", error);
@@ -25,5 +34,6 @@ const getPokemonDetail = async (url) => {
 
 export default {
   getPokemones,
-  getPokemonDetail, // Añadimos esta función para obtener detalles individuales
+  getPokemonDetail, 
+  getAllPokemones
 };
